@@ -1,0 +1,20 @@
+<html>
+<head>
+<title>Hello</title>
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+</head>
+<body>
+	<img id="image" src="photo.jpg"/>
+</body>
+
+<script>
+
+		var myFirebaseRef = new Firebase("https://blistering-torch-6998.firebaseIO.com/");
+		
+		myFirebaseRef.child("direction").on("value", function(snapshot) {
+			 $('#image').css('transform','rotate(' + (snapshot.val() * -10) + 'deg)');
+	
+		});
+	</script>
+</html>

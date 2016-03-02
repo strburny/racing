@@ -1,0 +1,1 @@
+http-server -S -C cert/localhost.cert -K cert/localhost.key
