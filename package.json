@@ -1,0 +1,26 @@
+{
+  "name": "racing",
+  "version": "1.0.0",
+  "description": "Battle Racing",
+  "main": "server.js",
+  "dependencies": {
+    "finalhandler": "^0.4.1",
+    "serve-static": "^1.10.2",
+    "websocket": "^1.0.22"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/strburny/racing.git"
+  },
+  "author": "vn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/strburny/racing/issues"
+  },
+  "homepage": "https://github.com/strburny/racing"
+}
