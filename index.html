@@ -6,6 +6,10 @@
 </head>
 <body>
 	<span id="movements"></span>
+	<div>
+	<button onclick="gas()">GAS</button>
+	<button onclick="fire()">FIRE</button>
+	</div>
 	<p>gyro.getFeatures: <span id="features"></span></p>
 	<span id="example"></span>
 </body>
@@ -14,7 +18,7 @@
 
 		var myFirebaseRef = new Firebase("https://blistering-torch-6998.firebaseIO.com/");
 		
-		gyro.frequency = 100;
+		gyro.frequency = 10;
 		gyro.startTracking(function(o) {
 		var a = document.getElementById('movements');
 			var position = o.beta/5 | 0;
@@ -26,7 +30,7 @@
 				a.innerHTML = "<p> going to right " + position + "</p>";
 			}
 			
-			myFirebaseRef.set({
+			myFirebaseRef.update({
 				direction: position
 			});
 		
@@ -40,5 +44,17 @@
 										"<p> beta = " + o.beta + "</p>" +
 										"<p> gamma = " + o.gamma + "</p>";
 		});
+		
+		function gas() {
+			myFirebaseRef.update({
+				speed: 300
+			});
+		}
+		
+		function fire(){
+			myFirebaseRef.update({
+				fire: Math.random()
+			});
+		}
 	</script>
 </html>
