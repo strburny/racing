@@ -15,6 +15,8 @@ var server = http.createServer(function(request, response) {
 server.listen(8080, function() {
     console.log((new Date()) + ' Server is listening on port 8080');
 });
+
+var clients = [];
  
 wsServer = new WebSocketServer({
     httpServer: server,
@@ -39,12 +41,17 @@ wsServer.on('request', function(request) {
       return;
     }
     
-    var connection = request.accept('echo-protocol', request.origin);
+    var connection = request.accept(null, request.origin);
+    clients.push(connection);
+
     console.log((new Date()) + ' Connection accepted.');
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
             console.log('Received Message: ' + message.utf8Data);
-            connection.sendUTF(message.utf8Data);
+			for (var i=0; i < clients.length; i++) {
+                    clients[i].sendUTF(message.utf8Data);
+            }
+
         }
         else if (message.type === 'binary') {
             console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');

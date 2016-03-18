@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Hello</title>
+<script src="js/gyro.js"></script>
+</head>
+<body>
+	<span id="movements"></span>
+	<div>
+	<button onclick="gas()">GAS</button>
+	<button onclick="fire()">FIRE</button>
+	</div>
+	<p>gyro.getFeatures: <span id="features"></span></p>
+	<span id="example"></span>
+</body>
+
+<script>
+
+		var exampleSocket = new WebSocket("ws://localhost:8080/");
+
+		exampleSocket.onopen = function (event) {
+  			exampleSocket.send("Connected !!!"); 
+		};
+		
+		/*gyro.frequency = 10;
+		gyro.startTracking(function(o) {
+		var a = document.getElementById('movements');
+			var position = o.beta/5 | 0;
+			if(position == 0) {
+				a.innerHTML = "<p> going directly</p>";
+			} else if (position > 0){
+				a.innerHTML = "<p> going to left " + position + "</p>";
+			} else {
+				a.innerHTML = "<p> going to right " + position + "</p>";
+			}
+			
+			/*exampleSocket.send({
+				direction: position
+			});
+		
+			var b = document.getElementById('example'),
+					f = document.getElementById('features');
+			f.innerHTML = gyro.getFeatures();
+			b.innerHTML = "<p> x = " + o.x + "</p>" +
+										"<p> y = " + o.y + "</p>" +
+										"<p> z = " + o.z + "</p>" +
+										"<p> alpha = " + o.alpha + "</p>" +
+										"<p> beta = " + o.beta + "</p>" +
+										"<p> gamma = " + o.gamma + "</p>";
+		});*/
+		
+		function gas() {
+			/*exampleSocket.send({
+				speed: 300
+			});*/ 
+			exampleSocket.send("fire"); 
+		}
+		
+		function fire(){
+			exampleSocket.send({
+				fire: Math.random()
+			}); 
+		}
+	</script>
+</html>
